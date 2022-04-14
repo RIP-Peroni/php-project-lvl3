@@ -12,7 +12,7 @@ console:
 
 log:
 	#tail -f storage/logs/laravel.log
-	heroku logs
+	heroku logs --tail
 
 test:
 	php artisan test
