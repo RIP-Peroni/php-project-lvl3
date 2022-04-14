@@ -3,17 +3,13 @@
 @section('title', 'Анализатор страниц')
 
 @if (Session::has('success'))
-    {{ Session::get('success') }}
+    <div class="alert alert-success" role="alert">{{ Session::get('success') }}</div>
 @endif
 
 @if ($errors->any())
-    <div>
-        <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <div class="alert alert-danger" role="alert">{{ $error }}</div>
             @endforeach
-        </ul>
-    </div>
 @endif
 
 @section('content')
@@ -25,7 +21,7 @@
                 <form action="{{ route('urls.store') }}" method="POST" class="d-flex justify-content-center">
                     @csrf
 
-                    <input type="text" name="name" class="form-control form-control-lg" placeholder="https://www.example.com/">
+                    <input type="text" name="url[name]" class="form-control form-control-lg" placeholder="https://www.example.com/">
                     <input type="submit" class="btn btn-primary btn-lg ms-3 px-5 mx-3 text-uppercase" value="Проверить">
                 </form>
             </div>
