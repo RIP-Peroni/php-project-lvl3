@@ -15,27 +15,27 @@
 @section('content')
     <div class="container-lg">
         <h1 class="mt-5 mb-3">Сайты</h1>
-        <table class="table table-bordered">
-            <thead>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-nowrap">
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Имя</th>
                 <th scope="col">Последняя проверка</th>
                 <th scope="col">Код ответа</th>
             </tr>
-            </thead>
-            <tbody>
             @foreach($urls as $url)
                 <tr>
                     <th scope="row">{{ $url->id }}</th>
-                    <td>{{ $url->name }}</td>
+                    <td>
+                        <a href="{{ route('urls.show', $url->id) }}">{{ $url->name }}</a>
+                    </td>
                     <td>{{ $url->updated_at }}</td>
 {{--                    todo:--}}
                     <td>код ответа</td>
                 </tr>
             @endforeach
-            </tbody>
         </table>
+        </div>
     </div>
     <div class="container-lg">
         {{ $urls->links() }}

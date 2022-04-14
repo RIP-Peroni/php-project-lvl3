@@ -19,7 +19,7 @@ class UrlController extends Controller
 //        dd($urls);
         return view(
             'urls.index',
-            ['urls' => $urls]
+            compact('urls')
         );
     }
 
@@ -57,11 +57,12 @@ class UrlController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $url = Url::findOrFail($id);
+        return view('urls.show', compact('url'));
     }
 
     /**
