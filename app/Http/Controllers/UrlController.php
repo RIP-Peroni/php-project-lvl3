@@ -16,7 +16,6 @@ class UrlController extends Controller
     public function index()
     {
         $urls = Url::orderBy('created_at', 'ASC')->paginate(3);
-//        dd($urls);
         return view(
             'urls.index',
             compact('urls')
@@ -41,16 +40,15 @@ class UrlController extends Controller
      */
     public function store(UrlPostRequest $request)
     {
-//        dd($_POST);
         $data = $request->validated();
-//        dd($data);
+        $name = $data['url']['name'];
         $newData = [
-            'name' => strtolower($data['url']['name'])
+            'name' => strtolower($name)
         ];
-        Url::create($newData);
-        return redirect()->route('urls.index')
+        $newUrl = Url::create($newData);
+        $id = $newUrl->id;
+        return redirect()->route('urls.show', $id)
             ->with('success', 'Url created successfully');
-//        return view('welcome');
     }
 
     /**
