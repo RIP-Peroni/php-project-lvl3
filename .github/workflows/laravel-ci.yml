@@ -7,10 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Copy .env.example to .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');
       - name: Install composer dependencies
-        run: composer install
+        run: make setup
       - name: Create temporary sqlite database
         run: |
           mkdir -p database
@@ -19,4 +17,4 @@ jobs:
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
-        run: ./vendor/bin/phpunit
+        run: make test
