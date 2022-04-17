@@ -15,7 +15,6 @@ class UrlControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-//        $this->setUpFaker();
         Url::factory()->count(2)->make();
     }
 

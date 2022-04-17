@@ -14,7 +14,4 @@ jobs:
           mkdir -p database
           touch database/database.sqlite
       - name: Run unit tests via PHPUnit
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
         run: make test
