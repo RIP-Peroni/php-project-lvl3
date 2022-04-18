@@ -15,7 +15,7 @@ class UrlController extends Controller
      */
     public function index()
     {
-        $urls = Url::orderBy('created_at', 'ASC')->paginate(3);
+        $urls = Url::orderBy('created_at', 'ASC')->paginate(5);
         return view(
             'urls.index',
             compact('urls')

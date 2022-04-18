@@ -10,7 +10,6 @@ use App\Models\Url;
 
 class UrlControllerTest extends TestCase
 {
-    use RefreshDatabase;
     use WithFaker;
     protected function setUp(): void
     {
