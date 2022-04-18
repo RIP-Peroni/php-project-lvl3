@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resources([
-    'urls' => \App\Http\Controllers\UrlController::class,
-]);
+//Route::resources([
+//    'urls' => \App\Http\Controllers\UrlController::class,
+////    'url_checks' => \App\Http\Controllers\UrlCheckController::class,
+//]);
+
+//Route::post('/urls/{id}/checks', [\App\Http\Controllers\UrlCheckController::class, 'store'])->name('check_process');
+
+Route::resource('urls', \App\Http\Controllers\UrlController::class)->only('index', 'store', 'show');
+Route::resource('url.checks', \App\Http\Controllers\UrlCheckController::class)->only('store');
