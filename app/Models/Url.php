@@ -10,4 +10,9 @@ class Url extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function urlChecks()
+    {
+        return $this->hasMany(UrlCheck::class)->orderBy('created_at');
+    }
 }

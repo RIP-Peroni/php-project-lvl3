@@ -34,7 +34,7 @@
             </table>
         </div>
         <h2 class="mt-5 mb-3">Проверки</h2>
-        <form class="mb-3" method="POST" action="#">
+        <form class="mb-3" method="POST" action="{{ route('url.checks.store', $url->id) }}">
             @csrf
 
             <input type="submit" class="btn btn-primary" value="Запустить проверку">
