@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Url;
 use App\Models\UrlCheck;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB; //todo убрать
 
 class UrlCheckController extends Controller
 {
@@ -18,7 +17,7 @@ class UrlCheckController extends Controller
     public function store($id): RedirectResponse
     {
 //        $newCheck = UrlCheck::create();
-        $url = Url::findOrFail($id);
+//        $url = Url::findOrFail($id);
         $data = ['url_id' => $id];
         $newCheck = new UrlCheck();
         $newCheck->fill($data);
