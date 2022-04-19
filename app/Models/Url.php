@@ -11,7 +11,7 @@ class Url extends Model
 
     protected $fillable = ['name'];
 
-    public function urlChecks()
+    public function urlChecks(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(UrlCheck::class)->orderBy('created_at');
     }

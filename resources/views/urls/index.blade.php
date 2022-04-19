@@ -23,17 +23,19 @@
                 <th scope="col">Последняя проверка</th>
                 <th scope="col">Код ответа</th>
             </tr>
-            @foreach($urls as $url)
-                <tr>
-                    <th scope="row">{{ $url->id }}</th>
-                    <td>
-                        <a href="{{ route('urls.show', $url->id) }}">{{ $url->name }}</a>
-                    </td>
-                    <td>{{ $url->updated_at }}</td>
-{{--                    todo:--}}
-                    <td>код ответа</td>
-                </tr>
-            @endforeach
+            @if($urls)
+                @foreach($urls as $url)
+                    <tr>
+                        <th scope="row">{{ $url->id }}</th>
+                        <td>
+                            <a href="{{ route('urls.show', $url->id) }}">{{ $url->name }}</a>
+                        </td>
+                        <td>{{ $lastChecks[$url->id]->updated_at ?? '' }}</td>
+    {{--                    todo:--}}
+                        <td>код ответа</td>
+                    </tr>
+                @endforeach
+            @endif
         </table>
         </div>
     </div>

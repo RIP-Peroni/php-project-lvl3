@@ -48,18 +48,16 @@
                 <th>description</th>
                 <th>Дата создания</th>
             </tr>
-            <tr>
-                <td>{{ $url->id }}</td>
-{{--                    todo код ответа--}}
-                <td>Код ответа</td>
-{{--                    todo h1--}}
-                <td>h1</td>
-{{--                    todo title--}}
-                <td>title</td>
-{{--                    todo description--}}
-                <td>description</td>
-                <td>{{ $url->updated_at }}</td>
-            </tr>
+            @foreach($urlChecks as $urlCheck)
+                <tr>
+                    <td>{{ $urlCheck->id }}</td>
+                    <td>{{ $urlCheck->status_code }}</td>
+                    <td>{{ $urlCheck->h1 }}</td>
+                    <td>{{ $urlCheck->title }}</td>
+                    <td>{{ $urlCheck->description }}</td>
+                    <td>{{ $urlCheck->updated_at }}</td>
+                </tr>
+            @endforeach
         </table>
     </div>
 @endsection

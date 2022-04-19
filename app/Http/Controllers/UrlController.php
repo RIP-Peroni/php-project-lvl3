@@ -4,21 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UrlPostRequest;
 use App\Models\Url;
-use Illuminate\Http\Request;
+use App\Models\UrlCheck;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 
 class UrlController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        $urls = Url::orderBy('created_at', 'ASC')->paginate(5);
+        $urls = Url::orderBy('created_at', 'ASC')->paginate();
+        $lastChecks = UrlCheck::all()->keyBy('url_id');
+//        dd($lastChecks);
         return view(
             'urls.index',
-            compact('urls')
+            compact('urls', 'lastChecks')
         );
     }
 
@@ -26,9 +33,9 @@ class UrlController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  UrlPostRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function store(UrlPostRequest $request)
+    public function store(UrlPostRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $name = $data['url']['name'];
@@ -45,11 +52,16 @@ class UrlController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function show($id)
     {
         $url = Url::findOrFail($id);
-        return view('urls.show', compact('url'));
+        $urlChecks = $url->urlChecks;
+//        dd($urlChecks);
+        return view(
+            'urls.show',
+            compact('url', 'urlChecks')
+        );
     }
 }
