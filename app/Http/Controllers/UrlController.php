@@ -22,7 +22,6 @@ class UrlController extends Controller
     {
         $urls = Url::orderBy('created_at', 'ASC')->paginate();
         $lastChecks = UrlCheck::all()->keyBy('url_id');
-//        dd($lastChecks);
         return view(
             'urls.index',
             compact('urls', 'lastChecks')
