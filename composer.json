@@ -1,7 +1,7 @@
 {
     "name": "hexlet/code",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Seo analyzer",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
