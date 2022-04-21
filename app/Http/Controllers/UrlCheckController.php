@@ -36,7 +36,7 @@ class UrlCheckController extends Controller
             $newCheck->fill($data);
             $newCheck->save();
             flash('Страница успешно проверена')->success();
-        } catch (GuzzleException $exception) {
+        } catch (\Exception $exception) {
             flash($exception->getMessage())->error();
         }
 
