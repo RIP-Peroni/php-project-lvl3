@@ -9,7 +9,13 @@ class UrlCheck extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['url_id'];
+    protected $fillable = [
+        'url_id',
+        'status_code',
+        'h1',
+        'title',
+        'description',
+    ];
 
     public function url(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

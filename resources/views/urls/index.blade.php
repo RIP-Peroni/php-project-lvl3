@@ -25,8 +25,7 @@
                             <a href="{{ route('urls.show', $url->id) }}">{{ $url->name }}</a>
                         </td>
                         <td>{{ $lastChecks[$url->id]->updated_at ?? '' }}</td>
-    {{--                    todo: код ответа--}}
-                        <td>код ответа</td>
+                        <td>{{ $lastChecks[$url->id]->status_code ?? '' }}</td>
                     </tr>
                 @endforeach
             @endif
