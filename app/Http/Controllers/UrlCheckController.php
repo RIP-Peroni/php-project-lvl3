@@ -26,11 +26,16 @@ class UrlCheckController extends Controller
         try {
             $response = Http::get($name);
             $statusCode = $response->status();
-//            $document = new Document($response->body());
-//            $h1 = optional($document->first('h1'))->text();
+            $document = new Document($response->body());
+            $h1 = optional($document->first('h1'))->text();
+            $title = optional($document->first('title'))->text();
+            $description = optional($document->first('meta[name=description]'))->getAttribute('content');
             $data = [
                 'url_id' => $id,
                 'status_code' => $statusCode,
+                'h1' => $h1,
+                'title' => $title,
+                'description' => $description,
             ];
             $newCheck = new UrlCheck();
             $newCheck->fill($data);
@@ -39,7 +44,6 @@ class UrlCheckController extends Controller
         } catch (\Exception $exception) {
             flash($exception->getMessage())->error();
         }
-
 
         return redirect()->route('urls.show', ['url' => $id]);
     }
