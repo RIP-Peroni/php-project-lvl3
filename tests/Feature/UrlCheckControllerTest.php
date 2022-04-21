@@ -16,17 +16,18 @@ class UrlCheckControllerTest extends TestCase
 
     public function testStore()
     {
-        $data = [
-            'name' => 'https://sdfszdfsdf.com',
-        ];
-
+        $name = 'https://sdfszdfsdf.com';
         $url = new Url();
-        $url->fill($data)->save();
+        $url->fill(['name' => $name])->save();
         $id = $url->id;
-        Http::fake();
+        $content = file_get_contents('tests/fixtures/testsite.html');
+        Http::fake([$name => Http::response($content, 200)]);
         $expectedData = [
             'url_id' => $id,
             'status_code' => 200,
+            'title' => 'example title',
+            'description' => 'test content',
+            'h1' => "I ain't the sharpest tool in the shed",
         ];
         $response = $this->post(route('url.checks.store', $id));
         $response->assertSessionHasNoErrors();
