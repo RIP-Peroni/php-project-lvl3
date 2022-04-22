@@ -50,7 +50,7 @@ class UrlController extends Controller
             $id = $existedName->id;
             flash('Страница уже существует')->info();
         }
-        return redirect()->route('urls.show', $id);
+        return redirect()->route('urls.show', ['url' => $id]);
     }
 
     /**
