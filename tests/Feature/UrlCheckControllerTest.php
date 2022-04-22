@@ -15,7 +15,7 @@ class UrlCheckControllerTest extends TestCase
 
     public function testStore()
     {
-        $name = 'https://sdfszdfsdf.com';
+        $name = 'https://testexample.com';
         $url = new Url();
         $url->fill(['name' => $name])->save();
         $id = $url->id;
