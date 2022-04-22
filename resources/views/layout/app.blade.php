@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {{--    todo - добавить в сборку в app.css--}}
-    <style>
-        .pagination > li > a,
-        .pagination > li > span {
-            color: black;
-        }
+{{--    <style>--}}
+{{--        .pagination > li > a,--}}
+{{--        .pagination > li > span {--}}
+{{--            color: black;--}}
+{{--        }--}}
 
-        .pagination > .active > a,
-        .pagination > .active > a:focus,
-        .pagination > .active > a:hover,
-        .pagination > .active > span,
-        .pagination > .active > span:focus,
-        .pagination > .active > span:hover {
-            background-color: black;
-            border-color: black;
-        }
-    </style>
+{{--        .pagination > .active > a,--}}
+{{--        .pagination > .active > a:focus,--}}
+{{--        .pagination > .active > a:hover,--}}
+{{--        .pagination > .active > span,--}}
+{{--        .pagination > .active > span:focus,--}}
+{{--        .pagination > .active > span:hover {--}}
+{{--            background-color: black;--}}
+{{--            border-color: black;--}}
+{{--        }--}}
+{{--    </style>--}}
 
     <title>@yield('title')</title>
 
