@@ -11,10 +11,12 @@ class HomePageTest extends TestCase
      *
      * @return void
      */
+    /** @test */
     public function homeTest()
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
+        $response->assertSessionHasNoErrors();
     }
 }
