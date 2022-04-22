@@ -15,12 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomePageController::class, 'home'])->name('home');
 
-//Route::resources([
-//    'urls' => \App\Http\Controllers\UrlController::class,
-////    'url_checks' => \App\Http\Controllers\UrlCheckController::class,
-//]);
-
-//Route::post('/urls/{id}/checks', [\App\Http\Controllers\UrlCheckController::class, 'store'])->name('check_process');
-
 Route::resource('urls', \App\Http\Controllers\UrlController::class)->only('index', 'store', 'show');
 Route::resource('url.checks', \App\Http\Controllers\UrlCheckController::class)->only('store');
