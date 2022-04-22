@@ -31,7 +31,7 @@ class UrlController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UrlPostRequest  $request
+     * @param  UrlPostRequest $request
      * @return RedirectResponse
      */
     public function store(UrlPostRequest $request): RedirectResponse
@@ -50,7 +50,7 @@ class UrlController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Application|Factory|View
      */
     public function show($id)

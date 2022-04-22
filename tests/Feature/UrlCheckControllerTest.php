@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 use App\Models\Url;
 
-
 class UrlCheckControllerTest extends TestCase
 {
     use WithFaker;

@@ -14,7 +14,7 @@ class UrlCheckController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param $id
+     * @param  $id
      * @return RedirectResponse
      */
     public function store(Request $request, $id): RedirectResponse
@@ -46,5 +46,4 @@ class UrlCheckController extends Controller
 
         return redirect()->route('urls.show', ['url' => $id]);
     }
-
 }

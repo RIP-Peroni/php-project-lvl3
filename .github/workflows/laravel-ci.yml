@@ -15,3 +15,5 @@ jobs:
           touch database/database.sqlite
       - name: Run unit tests via PHPUnit
         run: make test
+      - name: Check lint via PHP CodeSniffer
+        run: make lint

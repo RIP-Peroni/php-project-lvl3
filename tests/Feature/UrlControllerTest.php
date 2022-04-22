@@ -7,10 +7,10 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Url;
 
-
 class UrlControllerTest extends TestCase
 {
     use WithFaker;
+
     protected function setUp(): void
     {
         parent::setUp();
