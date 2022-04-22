@@ -21,10 +21,10 @@ deploy:
 	git push heroku main
 
 lint:
-	composer phpcs
+	composer exec phpcs app routes tests
 
 lint-fix:
-	composer phpcbf
+	composer exec phpcbf app routes tests
 
 setup:
 	composer install

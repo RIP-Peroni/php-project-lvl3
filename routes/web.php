@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\HomePageController::class, 'home'])->name('home');
 
 //Route::resources([
 //    'urls' => \App\Http\Controllers\UrlController::class,

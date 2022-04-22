@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Url;
 use App\Models\UrlCheck;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
