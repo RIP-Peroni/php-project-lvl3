@@ -38,13 +38,19 @@ class UrlController extends Controller
     {
         $data = $request->validated();
         $name = $data['url']['name'];
-        $newData = [
-            'name' => strtolower($name)
-        ];
-        $newUrl = Url::create($newData);
-        $id = $newUrl->id;
-        return redirect()->route('urls.show', $id)
-            ->with('success', 'Url created successfully');
+        $existedName = Url::where('name', $name)->first();
+        if (is_null($existedName)) {
+            $newData = [
+                'name' => strtolower($name)
+            ];
+            $newUrl = Url::create($newData);
+            $id = $newUrl->id;
+            flash('Страница успешно добавлена')->success();
+        } else {
+            $id = $existedName->id;
+            flash('Страница уже существует')->info();
+        }
+        return redirect()->route('urls.show', $id);
     }
 
     /**
