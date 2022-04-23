@@ -20,7 +20,8 @@ class UrlCheckController extends Controller
     public function store(int $id): RedirectResponse
     {
         $url = Url::query()->findOrFail($id);
-        $name = $url->valueOrFail('name');
+        $name = $url->getAttribute('name');
+//        $name = $url->name;
 //        abort_unless($url, 404);
         try {
             $response = Http::get($name);
