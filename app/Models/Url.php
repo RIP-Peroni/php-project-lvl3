@@ -13,6 +13,6 @@ class Url extends Model
 
     public function urlChecks(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(UrlCheck::class)->orderBy('created_at');
+        return $this->hasMany(UrlCheck::class);
     }
 }

@@ -19,7 +19,7 @@ class UrlController extends Controller
      */
     public function index()
     {
-        $urls = Url::orderBy('created_at', 'ASC')->paginate();
+        $urls = Url::query()->orderBy('created_at', 'ASC')->paginate();
         $lastChecks = UrlCheck::all()->keyBy('url_id');
         return view(
             'urls.index',
@@ -37,7 +37,7 @@ class UrlController extends Controller
     {
         $data = $request->validated();
         $name = $data['url']['name'];
-        $existedName = Url::where('name', $name)->first();
+        $existedName = Url::query()->where('name', $name)->first();
         if (is_null($existedName)) {
             $newData = [
                 'name' => strtolower($name)
@@ -60,8 +60,8 @@ class UrlController extends Controller
      */
     public function show($id)
     {
-        $url = Url::findOrFail($id);
-        $urlChecks = $url->urlChecks->sortDesc();
+        $url = Url::query()->findOrFail($id);
+        $urlChecks = $url->getAttribute('urlChecks')->sortDesc();
         return view(
             'urls.show',
             compact('url', 'urlChecks')
