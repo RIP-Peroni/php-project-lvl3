@@ -43,7 +43,7 @@ class UrlController extends Controller
                 'name' => strtolower($name)
             ];
             $newUrl = Url::query()->create($newData);
-            $id = $newUrl->getAttribute('id');
+            $id = $newUrl->value('id');
             flash('Страница успешно добавлена')->success();
         } else {
             $id = $existedName->id;
@@ -61,7 +61,7 @@ class UrlController extends Controller
     public function show(int $id)
     {
         $url = Url::query()->findOrFail($id);
-        $urlChecks = $url->getAttribute('urlChecks')->sortDesc();
+        $urlChecks = $url->value('urlChecks')->sortDesc();
         return view(
             'urls.show',
             compact('url', 'urlChecks')

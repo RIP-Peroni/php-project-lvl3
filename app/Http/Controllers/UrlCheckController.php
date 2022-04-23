@@ -29,7 +29,7 @@ class UrlCheckController extends Controller
             $document = new Document($response->body());
             $h1 = optional($document->first('h1'))->text();
             $title = optional($document->first('title'))->text();
-            $description = optional($document->first('meta[name=description]'))->getAttribute('content');
+            $description = optional($document->first('meta[name=description]'))->value('content');
             $data = [
                 'url_id' => $id,
                 'status_code' => $statusCode,
