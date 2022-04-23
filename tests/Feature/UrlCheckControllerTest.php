@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Models\UrlCheck;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
-use App\Models\Url;
 
 class UrlCheckControllerTest extends TestCase
 {
@@ -16,9 +15,12 @@ class UrlCheckControllerTest extends TestCase
     public function testStore()
     {
         $name = 'https://testshowsdf.com';
-        $url = new Url();
-        $url->fill(['name' => $name])->save();
-        $id = $url->getAttribute('id');
+        $data = [
+            'name' => $name,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ];
+        $id = DB::table('urls')->insertGetId($data);
         $content = file_get_contents('tests/fixtures/testsite.html');
         Http::fake([$name => Http::response($content)]);
         $expectedData = [

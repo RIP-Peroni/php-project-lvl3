@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UrlRequest;
-use App\Models\Url;
-use App\Models\UrlCheck;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -21,8 +19,13 @@ class UrlController extends Controller
      */
     public function index()
     {
-        $urls = Url::query()->orderBy('created_at', 'ASC')->paginate();
-        $lastChecks = UrlCheck::all()->keyBy('url_id');
+        $urls = DB::table('urls')->paginate();
+        $lastChecks = DB::table('url_checks')
+            ->orderBy('url_id')
+            ->latest()
+            ->distinct('url_id')
+            ->get()
+            ->keyBy('url_id');
         return view(
             'urls.index',
             compact('urls', 'lastChecks')
@@ -39,7 +42,7 @@ class UrlController extends Controller
     {
         $data = $request->validated();
         $name = $data['url']['name'];
-        $existedName = Url::query()->where('name', $name)->first();
+        $existedName = DB::table('urls')->where('name', $name)->first();
         if (is_null($existedName)) {
             $newData = [
                 'name' => strtolower($name),
@@ -63,7 +66,7 @@ class UrlController extends Controller
      */
     public function show(int $id)
     {
-        $url = Url::query()->findOrFail($id);
+        $url = DB::table('urls')->find($id);
         $urlChecks = DB::table('url_checks')
             ->where('url_id', $id)
             ->latest()

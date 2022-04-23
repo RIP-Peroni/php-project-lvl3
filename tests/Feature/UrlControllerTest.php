@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-use App\Models\Url;
 
 class UrlControllerTest extends TestCase
 {
@@ -14,7 +15,11 @@ class UrlControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        Url::factory()->count(2)->make();
+        DB::table('urls')->insert([
+            'name' => 'https://testexample.biz',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
     }
 
     public function testIndex()
@@ -41,12 +46,11 @@ class UrlControllerTest extends TestCase
 
     public function testShow()
     {
-        $url = new Url();
         $data = [
             'name' => 'https://testshowsdf.com'
         ];
-        $url->fill($data)->save();
-        $response = $this->get(route('urls.show', $url));
+        $id = DB::table('urls')->insertGetId($data);
+        $response = $this->get(route('urls.show', $id));
         $response->assertSessionHasNoErrors();
         $response->assertOk();
         $response->assertSeeText($data['name']);
