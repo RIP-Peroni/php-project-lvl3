@@ -43,7 +43,7 @@ class UrlController extends Controller
                 'name' => strtolower($name)
             ];
             $newUrl = Url::query()->create($newData);
-            $id = $newUrl->id;
+            $id = $newUrl->getAttribute('id');
             flash('Страница успешно добавлена')->success();
         } else {
             $id = $existedName->id;
