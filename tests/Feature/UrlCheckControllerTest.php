@@ -18,7 +18,7 @@ class UrlCheckControllerTest extends TestCase
         $name = 'https://testshowsdf.com';
         $url = new Url();
         $url->fill(['name' => $name])->save();
-        $id = $url->id;
+        $id = $url->getAttribute('id');
         $content = file_get_contents('tests/fixtures/testsite.html');
         Http::fake([$name => Http::response($content)]);
         $expectedData = [

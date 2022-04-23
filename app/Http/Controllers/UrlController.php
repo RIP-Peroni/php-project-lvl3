@@ -42,7 +42,7 @@ class UrlController extends Controller
             $newData = [
                 'name' => strtolower($name)
             ];
-            $newUrl = Url::create($newData);
+            $newUrl = Url::query()->create($newData);
             $id = $newUrl->id;
             flash('Страница успешно добавлена')->success();
         } else {
@@ -55,10 +55,10 @@ class UrlController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return Application|Factory|View
      */
-    public function show($id)
+    public function show(int $id)
     {
         $url = Url::query()->findOrFail($id);
         $urlChecks = $url->getAttribute('urlChecks')->sortDesc();

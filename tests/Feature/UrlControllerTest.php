@@ -25,7 +25,6 @@ class UrlControllerTest extends TestCase
 
     public function testStore()
     {
-        $data = Url::factory()->make()->only('url');
         $fullUrl = $this->faker->url();
         $parsedUrl = parse_url($fullUrl);
         $url = $parsedUrl['scheme'] . '://' . $parsedUrl['host'];
