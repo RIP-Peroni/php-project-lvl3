@@ -14,14 +14,14 @@ class UrlCheckController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  $id
+     * @param int $id
      * @return RedirectResponse
      */
-    public function store(Request $request, $id): RedirectResponse
+    public function store(int $id): RedirectResponse
     {
-        $url = Url::findOrFail($id);
-        $name = $url->name;
-        abort_unless($url, 404);
+        $url = Url::query()->findOrFail($id);
+        $name = $url->valueOrFail('name');
+//        abort_unless($url, 404);
         try {
             $response = Http::get($name);
             $statusCode = $response->status();
