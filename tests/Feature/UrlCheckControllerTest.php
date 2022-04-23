@@ -28,7 +28,7 @@ class UrlCheckControllerTest extends TestCase
             'description' => 'test content',
             'h1' => "I ain't the sharpest tool in the shed",
         ];
-        $response = $this->post(route('url.checks.store', $id));
+        $response = $this->post(route('urls.checks.store', $id));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('url_checks', $expectedData);
