@@ -20,7 +20,7 @@ class UrlCheckControllerTest extends TestCase
         $url->fill(['name' => $name])->save();
         $id = $url->id;
         $content = file_get_contents('tests/fixtures/testsite.html');
-        Http::fake([$name => Http::response($content, 200)]);
+        Http::fake([$name => Http::response($content)]);
         $expectedData = [
             'url_id' => $id,
             'status_code' => 200,
@@ -30,7 +30,7 @@ class UrlCheckControllerTest extends TestCase
         ];
         $response = $this->post(route('url.checks.store', $id));
         $response->assertSessionHasNoErrors();
-        $response->assertStatus(302);
+        $response->assertRedirect();
         $this->assertDatabaseHas('url_checks', $expectedData);
     }
 }
