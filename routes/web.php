@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomePageController::class, 'home'])->name('home');
 
 Route::resource('urls', \App\Http\Controllers\UrlController::class)->only('index', 'store', 'show');
-Route::resource('url.checks', \App\Http\Controllers\UrlCheckController::class)->only('store');
+Route::resource('urls.checks', \App\Http\Controllers\UrlCheckController::class)->only('store');
