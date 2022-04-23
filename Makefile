@@ -36,5 +36,4 @@ setup:
 	npm install
 
 test-coverage:
-	composer exec --verbose phpunit tests -- --coverage-text
-	#composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
+	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
