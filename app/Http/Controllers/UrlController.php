@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UrlPostRequest;
+use App\Http\Requests\UrlRequest;
 use App\Models\Url;
 use App\Models\UrlCheck;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -31,17 +32,19 @@ class UrlController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UrlPostRequest $request
+     * @param  UrlRequest $request
      * @return RedirectResponse
      */
-    public function store(UrlPostRequest $request): RedirectResponse
+    public function store(UrlRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $name = $data['url']['name'];
         $existedName = Url::query()->where('name', $name)->first();
         if (is_null($existedName)) {
             $newData = [
-                'name' => strtolower($name)
+                'name' => strtolower($name),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
             $id = DB::table('urls')->insertGetId($newData);
             flash('Страница успешно добавлена')->success();

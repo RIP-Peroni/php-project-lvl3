@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Url;
 use App\Models\UrlCheck;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,10 +37,10 @@ class UrlCheckController extends Controller
                 'h1' => $h1,
                 'title' => $title,
                 'description' => $description,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
-            $newCheck = new UrlCheck();
-            $newCheck->fill($data);
-            $newCheck->save();
+            DB::table('url_checks')->insert($data);
             flash('Страница успешно проверена')->success();
         } catch (\Exception $exception) {
             flash($exception->getMessage())->error();
