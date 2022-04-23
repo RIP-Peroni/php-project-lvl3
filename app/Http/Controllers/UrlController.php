@@ -61,7 +61,7 @@ class UrlController extends Controller
     public function show(int $id)
     {
         $url = Url::query()->findOrFail($id);
-        $urlChecks = $url->value('urlChecks')->sortDesc();
+        $urlChecks = $url->urlChecks()->get()->sortDesc();
         return view(
             'urls.show',
             compact('url', 'urlChecks')
