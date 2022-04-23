@@ -11,7 +11,7 @@ console:
 	php artisan tinker
 
 log:
-	#tail -f storage/logs/laravel.log
+	tail -f storage/logs/laravel.log
 	heroku logs --tail
 
 test:
@@ -34,3 +34,6 @@ setup:
 	php artisan migrate
 	php artisan db:seed
 	npm install
+
+test-coverage:
+	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
