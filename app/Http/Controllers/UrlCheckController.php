@@ -6,6 +6,7 @@ use App\Models\Url;
 use App\Models\UrlCheck;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use DiDom\Document;
 
@@ -19,10 +20,9 @@ class UrlCheckController extends Controller
      */
     public function store(int $id): RedirectResponse
     {
-        $url = Url::query()->findOrFail($id);
-        $name = $url->getAttribute('name');
-//        $name = $url->name;
-//        abort_unless($url, 404);
+        $url = DB::table('urls')->find($id);
+        $name = $url->name;
+        abort_unless($url, 404);
         try {
             $response = Http::get($name);
             $statusCode = $response->status();

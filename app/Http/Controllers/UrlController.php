@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class UrlController extends Controller
 {
@@ -42,8 +43,7 @@ class UrlController extends Controller
             $newData = [
                 'name' => strtolower($name)
             ];
-            $newUrl = Url::query()->create($newData);
-            $id = $newUrl->value('id');
+            $id = DB::table('urls')->insertGetId($newData);
             flash('Страница успешно добавлена')->success();
         } else {
             $id = $existedName->id;
@@ -61,7 +61,10 @@ class UrlController extends Controller
     public function show(int $id)
     {
         $url = Url::query()->findOrFail($id);
-        $urlChecks = $url->urlChecks()->get()->sortDesc();
+        $urlChecks = DB::table('url_checks')
+            ->where('url_id', $id)
+            ->latest()
+            ->get();
         return view(
             'urls.show',
             compact('url', 'urlChecks')
